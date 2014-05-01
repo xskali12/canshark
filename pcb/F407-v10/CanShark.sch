@@ -16880,6 +16880,7 @@ Source: &lt;a href="http://www.farnell.com/datasheets/391098.pdf"&gt; Data sheet
 <part name="C39" library="#Kondenzatory" deviceset="KERAMICKY" device="SMD0603" value="22p"/>
 <part name="C40" library="#Kondenzatory" deviceset="KERAMICKY" device="SMD0603" value="22p"/>
 <part name="GND56" library="supply1" deviceset="GND" device=""/>
+<part name="+3V18" library="supply1" deviceset="+3V3" device=""/>
 </parts>
 <sheets>
 <sheet>
@@ -17101,9 +17102,10 @@ Source: &lt;a href="http://www.farnell.com/datasheets/391098.pdf"&gt; Data sheet
 <instance part="C39" gate="G$1" x="48.26" y="119.38"/>
 <instance part="C40" gate="G$1" x="55.88" y="119.38"/>
 <instance part="GND56" gate="1" x="55.88" y="109.22"/>
+<instance part="+3V18" gate="G$1" x="124.46" y="55.88"/>
 </instances>
 <busses>
-<bus name="ADC_TRIG,ADC_CAN1L,ADC_CAN1H,ADC_TRIG_VALUE_PWM,CAN2_TX,CAN2_RX,CAN2_MODE,CAN1_TX,CAN1_RX,CAN1_MODE,ETH_MDC,ETH_MDIO,ETH_MII_TX_EN,ETH_MII_TX_CLK,ETH_MII_TXD[0..3],ETH_MII_RX_CLK,ETH_MII_RXD[0..3],ETH_MII_RX_ER,ETH_MII_RX_DV,ETH_MII_CRS,ETH_MII_COL,ETH_INTRP,ETH_RST,JTG-TRST,JTG-TDI,JTG-TMS/SWDIO,JTG-TCK/SWCLK,JTG-TDO/SWO,NRST,ADC_CAN1DIFF,LED_CAN1,LED_CAN2,LED_GLOBAL,USART1_TX,USART1_RX,OSC_IN,OSC_OUT">
+<bus name="ADC_TRIG,ADC_CAN1L,ADC_CAN1H,ADC_TRIG_VALUE_PWM,CAN2_TX,CAN2_RX,CAN2_MODE,CAN1_TX,CAN1_RX,CAN1_MODE,ETH_MDC,ETH_MDIO,ETH_MII_TX_EN,ETH_MII_TX_CLK,ETH_MII_TXD[0..3],ETH_MII_RX_CLK,ETH_MII_RXD[0..3],ETH_MII_RX_ER,ETH_MII_RX_DV,ETH_MII_CRS,ETH_MII_COL,ETH_INTRP,ETH_RST,JTG-TRST,JTG-TDI,JTG-TMS/SWDIO,JTG-TCK/SWCLK,JTG-TDO/SWO,NRST,ADC_CAN1DIFF,LED_CAN1,LED_CAN2,LED_GLOBAL,USART3_TX,USART3_RX,OSC_IN,OSC_OUT">
 <segment>
 <wire x1="63.5" y1="137.16" x2="63.5" y2="81.28" width="0.762" layer="92"/>
 <wire x1="63.5" y1="81.28" x2="63.5" y2="27.94" width="0.762" layer="92"/>
@@ -17320,6 +17322,15 @@ Source: &lt;a href="http://www.farnell.com/datasheets/391098.pdf"&gt; Data sheet
 <pinref part="+3V17" gate="G$1" pin="+3V3"/>
 <wire x1="215.9" y1="175.26" x2="220.98" y2="175.26" width="0.1524" layer="91"/>
 <wire x1="220.98" y1="175.26" x2="220.98" y2="180.34" width="0.1524" layer="91"/>
+</segment>
+<segment>
+<pinref part="IC1" gate="A" pin="VDD@4"/>
+<pinref part="C5" gate="G$1" pin="1"/>
+<wire x1="134.62" y1="55.88" x2="134.62" y2="50.8" width="0.1524" layer="91"/>
+<wire x1="134.62" y1="50.8" x2="124.46" y2="50.8" width="0.1524" layer="91"/>
+<pinref part="+3V18" gate="G$1" pin="+3V3"/>
+<wire x1="124.46" y1="50.8" x2="124.46" y2="53.34" width="0.1524" layer="91"/>
+<junction x="134.62" y="50.8"/>
 </segment>
 </net>
 <net name="GND" class="0">
@@ -17679,13 +17690,6 @@ Source: &lt;a href="http://www.farnell.com/datasheets/391098.pdf"&gt; Data sheet
 <junction x="55.88" y="114.3"/>
 </segment>
 </net>
-<net name="N$3" class="0">
-<segment>
-<pinref part="IC1" gate="A" pin="VDD@4"/>
-<pinref part="C5" gate="G$1" pin="1"/>
-<wire x1="134.62" y1="55.88" x2="134.62" y2="50.8" width="0.1524" layer="91"/>
-</segment>
-</net>
 <net name="N$2" class="0">
 <segment>
 <pinref part="IC1" gate="A" pin="VCAP_1"/>
@@ -18002,34 +18006,6 @@ Source: &lt;a href="http://www.farnell.com/datasheets/391098.pdf"&gt; Data sheet
 <wire x1="149.86" y1="-297.18" x2="50.8" y2="-297.18" width="0.1524" layer="91"/>
 <wire x1="50.8" y1="-297.18" x2="48.26" y2="-294.64" width="0.1524" layer="91"/>
 <label x="50.8" y="-297.18" size="1.778" layer="95"/>
-</segment>
-</net>
-<net name="USART1_RX" class="0">
-<segment>
-<pinref part="IC1" gate="A" pin="PA10"/>
-<wire x1="205.74" y1="116.84" x2="243.84" y2="116.84" width="0.1524" layer="91"/>
-<wire x1="243.84" y1="116.84" x2="246.38" y2="114.3" width="0.1524" layer="91"/>
-<label x="228.6" y="116.84" size="1.778" layer="95"/>
-</segment>
-<segment>
-<pinref part="JP8" gate="A" pin="3"/>
-<wire x1="215.9" y1="170.18" x2="243.84" y2="170.18" width="0.1524" layer="91"/>
-<wire x1="243.84" y1="170.18" x2="246.38" y2="167.64" width="0.1524" layer="91"/>
-<label x="231.14" y="170.18" size="1.778" layer="95"/>
-</segment>
-</net>
-<net name="USART1_TX" class="0">
-<segment>
-<pinref part="IC1" gate="A" pin="PA9"/>
-<wire x1="205.74" y1="114.3" x2="243.84" y2="114.3" width="0.1524" layer="91"/>
-<wire x1="243.84" y1="114.3" x2="246.38" y2="111.76" width="0.1524" layer="91"/>
-<label x="228.6" y="114.3" size="1.778" layer="95"/>
-</segment>
-<segment>
-<pinref part="JP8" gate="A" pin="2"/>
-<wire x1="215.9" y1="172.72" x2="243.84" y2="172.72" width="0.1524" layer="91"/>
-<wire x1="243.84" y1="172.72" x2="246.38" y2="170.18" width="0.1524" layer="91"/>
-<label x="231.14" y="172.72" size="1.778" layer="95"/>
 </segment>
 </net>
 <net name="CAN2_RX" class="0">
@@ -19056,6 +19032,34 @@ Source: &lt;a href="http://www.farnell.com/datasheets/391098.pdf"&gt; Data sheet
 <junction x="55.88" y="129.54"/>
 <wire x1="60.96" y1="129.54" x2="55.88" y2="129.54" width="0.1524" layer="91"/>
 <label x="60.96" y="129.54" size="1.778" layer="95" rot="R90"/>
+</segment>
+</net>
+<net name="USART3_TX" class="0">
+<segment>
+<pinref part="JP8" gate="A" pin="2"/>
+<wire x1="215.9" y1="172.72" x2="243.84" y2="172.72" width="0.1524" layer="91"/>
+<wire x1="243.84" y1="172.72" x2="246.38" y2="170.18" width="0.1524" layer="91"/>
+<label x="228.6" y="172.72" size="1.778" layer="95"/>
+</segment>
+<segment>
+<pinref part="IC1" gate="A" pin="PC10"/>
+<wire x1="185.42" y1="152.4" x2="185.42" y2="187.96" width="0.1524" layer="91"/>
+<wire x1="185.42" y1="187.96" x2="187.96" y2="190.5" width="0.1524" layer="91"/>
+<label x="185.42" y="172.72" size="1.778" layer="95" rot="R90"/>
+</segment>
+</net>
+<net name="USART3_RX" class="0">
+<segment>
+<pinref part="JP8" gate="A" pin="3"/>
+<wire x1="215.9" y1="170.18" x2="243.84" y2="170.18" width="0.1524" layer="91"/>
+<wire x1="243.84" y1="170.18" x2="246.38" y2="167.64" width="0.1524" layer="91"/>
+<label x="228.6" y="170.18" size="1.778" layer="95"/>
+</segment>
+<segment>
+<pinref part="IC1" gate="A" pin="PC11"/>
+<wire x1="182.88" y1="152.4" x2="182.88" y2="187.96" width="0.1524" layer="91"/>
+<wire x1="182.88" y1="187.96" x2="185.42" y2="190.5" width="0.1524" layer="91"/>
+<label x="182.88" y="172.72" size="1.778" layer="95" rot="R90"/>
 </segment>
 </net>
 </nets>
