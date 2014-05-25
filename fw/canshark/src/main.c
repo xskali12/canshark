@@ -53,6 +53,7 @@ void sys_tick_handler(void)
 
 uint64_t arp_tmr;
 uint64_t led_tmr;
+uint32_t led_speed_down = 0;
 
 #define BENCHMARK_START(a)	a = dwt_read_cycle_counter()
 #define BENCHMARK_END(a)	a = dwt_read_cycle_counter() - a;
@@ -82,7 +83,12 @@ int main(void)
 	IP4_ADDR(&ipa, 255, 255, 255, 255);  // the IP to send data to
 
 	while (1) {
-		LED_TGL(LED0);
+        if (led_speed_down++ > 100000)
+        {
+
+            LED_TGL(LED0);
+            led_speed_down = 0;
+        }
 
 		ethf417_poll(&netif);
 
@@ -111,7 +117,7 @@ int main(void)
 		}
 
 		if (stick_fire(&led_tmr, STICK_HZ)) {
-			LED_TGL(LED6);
+			//LED_TGL(LED6);
 		}
 	}
 

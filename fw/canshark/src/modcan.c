@@ -17,17 +17,22 @@ struct can_message msgs[8];
 uint8_t msgs_w = 0;
 uint8_t msgs_r = 0;
 
+
 void modcan_init(void)
 {
 	// enable the clocks
 	rcc_periph_clock_enable(RCC_CAN1);
 	rcc_periph_clock_enable(RCC_CAN2);
 	rcc_periph_clock_enable(RCC_GPIOB);
+	rcc_periph_clock_enable(RCC_GPIOA);
 
 	// init pins
-	gpio_mode_setup(GPIOB, GPIO_MODE_AF, GPIO_PUPD_PULLUP, GPIO5 | GPIO6 | GPIO8 | GPIO9);
-	gpio_set_af(GPIOB, GPIO_AF9, GPIO5 | GPIO6 | GPIO8 | GPIO9);
-	gpio_set_output_options(GPIOB, GPIO_OTYPE_OD, GPIO_OSPEED_25MHZ, GPIO6 | GPIO9);
+	gpio_mode_setup(GPIOB, GPIO_MODE_AF, GPIO_PUPD_PULLUP, GPIO5 | GPIO6 );
+	gpio_set_af(GPIOB, GPIO_AF9, GPIO5 | GPIO6 );
+	gpio_mode_setup(GPIOA, GPIO_MODE_AF, GPIO_PUPD_PULLUP, GPIO11 | GPIO12 );
+	gpio_set_af(GPIOA, GPIO_AF9, GPIO11 | GPIO12 );
+	gpio_set_output_options(GPIOB, GPIO_OTYPE_OD, GPIO_OSPEED_25MHZ, GPIO6 );
+	gpio_set_output_options(GPIOA, GPIO_OTYPE_OD, GPIO_OSPEED_25MHZ, GPIO12 );
 
 	can_reset(CAN1);
 	can_reset(CAN2);
@@ -36,7 +41,7 @@ void modcan_init(void)
 	can_leave_sleep_mode(CAN2);
 
 	struct can_timing ct;
-	can_timing_init(&ct, CAN_FREQ_500K, CAN_SAMPLE_75);
+	can_timing_init(&ct, CAN_FREQ_250K, CAN_SAMPLE_75); //CAN_FREQ_500K
 
 	//uint32_t canfreq = can_timing_getfreq(&ct);
 
@@ -119,7 +124,7 @@ static void can_isr_tx(uint32_t canport)
 	} else if (CAN_TSR(canport) & CAN_TSR_RQCP2) {
 		mailbox = 2;
 	} else {
-		LED_TGL(LED3);
+		//LED_TGL(LED3);
 		return;
 	}
 
@@ -128,7 +133,7 @@ static void can_isr_tx(uint32_t canport)
 	struct can_message *msg = canmsg_get();
 
 	if (msg == NULL) {
-		LED_TGL(LED4);
+		//LED_TGL(LED4);
 		return;
 	}
 
@@ -146,10 +151,14 @@ static void can_isr_rx(uint32_t canport, uint32_t fifo)
 	struct can_message *msg = canmsg_get();
 
 	if (msg == NULL) {
-		LED_TGL(LED4);
+		//LED_TGL(LED4);
 		can_fifo_release(canport, fifo);
 		return;
 	}
+	if (canport == CAN1)
+        LED_TGL(LED1);
+    else
+        LED_TGL(LED2);
 
 	msg->source = (fifo << 4) | ((canport == CAN1) ? 1 : 2);
 	msg->mobid = can_fifo_get_mobid(canport, fifo);
